@@ -13,7 +13,7 @@ class Review(models.Model):
 
 class User(models.Model):
     name = models.CharField(max_length=100)
-    phone = models.IntegerField(max_length=10)
+    phone = models.IntegerField()
     email = models.EmailField(max_length=150)
     location = models.CharField(max_length=150)
     rating = models.IntegerField()
