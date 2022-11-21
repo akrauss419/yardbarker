@@ -19,14 +19,12 @@
                     <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Yard Barker</a></li>
                 </ul>
                 <ul class="right">
-                  <!-- <li><a href="{% url 'about' %}">About</a></li> -->
+                  <li><a href="{% url 'about' %}">About</a></li>
                   {% if user.is_authenticated %}
-                    <!-- <li><a href="{% url 'jobs_create' %}">Add a Job</a></li>
-                    <li><a href="{% url 'jobs_index' %}">View All Jobs</a></li>
-                    <li><a href="{% url 'logout' %}">Log Out</a></li> -->
+                    <li><a href="{% url 'logout' %}">Log Out</a></li>
                   {% else %}
-                    <!-- <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                    <li><a href="{% url 'login' %}">Log In</a></li> -->
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                    <li><a href="{% url 'login' %}">Log In</a></li>
                   {% endif %}
                 </ul>
             </div>
