@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Job List</h1>
+
+{% for job in jobs %}
+  <a href="{% url 'detail' job.id %}">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ job.name }}</span>
+        <p>Task: {{ job.task }}</p>
+          <span>
+            <span>Location: {{ job.location }}</span>
+            <span>Reward: {{ job.reward }}</span>
+          </span>
+        <p>Description: {{ job.description|linebreaks }}</p>
+        <span>Is Done:</span>
+      </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}
