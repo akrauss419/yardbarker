@@ -4,7 +4,6 @@ from phone_field import PhoneField
 
 # Create your models here.
 
-
 class Review(models.Model):
   content = models.CharField(max_length=150)
   date = models.DateField('Review date')
