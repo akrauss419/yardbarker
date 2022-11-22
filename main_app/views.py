@@ -1,3 +1,6 @@
+import os
+import uuid
+import boto3
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
@@ -37,6 +40,23 @@ class JobUpdate(LoginRequiredMixin, UpdateView):
 class JobDelete(LoginRequiredMixin, DeleteView):
   model = Job
   success_url = '/jobs'
+
+
+@login_required
+def add_job_photo(request, job_id):
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      bucket = os.environ['S3_BUCKET']
+      s3.upload_fileobj(photo_file, bucket, key)
+      url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+      JobPhoto.objects.create(url=url, job_id=job_id)
+    except Exception as e:
+      print('An error occurred uploading file to S3')
+      print(e)
+    return redirect('detail', job_id=job_id)
 
 
 def signup(request):
