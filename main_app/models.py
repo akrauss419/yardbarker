@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from phone_field import PhoneField
+
 
 # Create your models here.
 class Review(models.Model):
@@ -13,7 +15,7 @@ class Review(models.Model):
 
 class User(models.Model):
   name = models.CharField(max_length=100)
-  phone = models.IntegerField()
+  phone = PhoneField(blank=True, help_text='Contact phone number')
   email = models.EmailField(max_length=150)
   location = models.CharField(max_length=150)
   rating = models.IntegerField()
@@ -28,7 +30,7 @@ class User(models.Model):
 
 class Contractor(models.Model):
   name = models.CharField(max_length=100)
-  phone = models.IntegerField()
+  phone = PhoneField(blank=True, help_text='Contact phone number')
   email = models.EmailField(max_length=150)
   location = models.CharField(max_length=150)
   rating = models.IntegerField()
