@@ -13,6 +13,5 @@ urlpatterns = [
   path('jobs/<int:job_id>/add_job_photo', views.add_job_photo, name='add_job_photo'),
   path('contractors/', views.ContractorList.as_view(), name='contractors_index'),
   path('contractors/<int:pk>/', views.ContractorDetail.as_view(), name='contractors_detail'),
-  path('jobs/<int:job_id>/add_job_photo', views.add_job_photo, name='add_job_photo'),
   path('accounts/signup/', views.signup, name='signup'),
 ]
