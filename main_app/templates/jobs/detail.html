@@ -20,6 +20,10 @@
           <p>Contractor: {{ contractor }}</p>
         {% endfor %}
       </div>
+      <div class="card-action">
+        <a href="{% url 'jobs_update' job.id %}">Edit</a>
+        <a href="{% url 'jobs_delete' job.id %}">Delete</a>
+      </div>
     </div>
   </div>
 </div>
