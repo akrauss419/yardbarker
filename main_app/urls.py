@@ -11,5 +11,7 @@ urlpatterns = [
   path('jobs/<int:pk>/update', views.JobUpdate.as_view(), name='jobs_update'),
   path('jobs/<int:pk>/delete', views.JobDelete.as_view(), name='jobs_delete'),
   path('jobs/<int:job_id>/add_job_photo', views.add_job_photo, name='add_job_photo'),
+  path('contractors/', views.ContractorList.as_view(), name='contractors_index'),
+  path('contractors/<int:pk>/', views.ContractorDetail.as_view(), name='contractors_detail'),
   path('accounts/signup/', views.signup, name='signup'),
 ]
