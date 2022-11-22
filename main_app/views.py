@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -29,6 +29,14 @@ def jobs_detail(request, job_id):
 class JobCreate(LoginRequiredMixin, CreateView):
   model = Job
   fields = ['name', 'task', 'location', 'reward', 'description', 'posters']
+
+class JobUpdate(LoginRequiredMixin, UpdateView):
+  model = Job
+  fields = ['name', 'task', 'location', 'reward', 'description']
+
+class JobDelete(LoginRequiredMixin, DeleteView):
+  model = Job
+  success_url = '/jobs'
 
 
 def signup(request):
