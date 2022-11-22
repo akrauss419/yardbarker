@@ -18,7 +18,7 @@ def about(request):
 
 @login_required
 def jobs_index(request):
-  jobs = Job.objects.filter(posters=request.user)
+  jobs = Job.objects.filter(isDone=False)
   return render(request, 'jobs/index.html', {
     'jobs': jobs
   })
