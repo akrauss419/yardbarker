@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Job Details</h1>
+
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ job.name }}</span>
+        <p>Task: {{ job.task }}</p>
+        <span>
+          <span>Location: {{ job.location }}</span>
+          <span>Reward: ${{ job.reward }}</span>
+        </span>
+        <p>Description: {{ job.description|linebreaks }}</p>
+        <span>Is Done:</span>
+        <p>Poster: {{ job.posters }}</p>
+        {% for contractor in job.contractors.all %}
+          <p>Contractor: {{ contractor }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
