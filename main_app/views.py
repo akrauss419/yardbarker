@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
+from django.views.generic.edit import CreateView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Job, User, Review, Contractor, JobPhoto, UserPhoto, ContractorPhoto
 
 def home(request):
@@ -16,6 +18,18 @@ def jobs_index(request):
   return render(request, 'jobs/index.html', {
     'jobs': jobs
   })
+
+@login_required
+def jobs_detail(request, job_id):
+  job = Job.objects.get(id=job_id)
+  return render(request, 'jobs/detail.html', {
+    'job': job
+  })
+
+class JobCreate(LoginRequiredMixin, CreateView):
+  model = Job
+  fields = ['name', 'task', 'location', 'reward', 'description', 'posters']
+
 
 def signup(request):
   error_message = ''
