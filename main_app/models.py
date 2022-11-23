@@ -7,7 +7,7 @@ from phone_field import PhoneField
 class Review(models.Model):
   content = models.CharField(max_length=150)
   date = models.DateField('Review date')
-  rating = models.IntegerField()
+  rating = models.FloatField(default=0)
 
   def __str__(self):
     return f"Reviewed on {self.date}"
@@ -18,7 +18,7 @@ class User(models.Model):
   phone = PhoneField(blank=True, help_text='Contact phone number')
   email = models.EmailField(max_length=150)
   location = models.CharField(max_length=150)
-  rating = models.IntegerField()
+  rating = models.FloatField(default=0)
   review = models.ForeignKey(Review, on_delete=models.CASCADE)
 
   def __str__(self):
@@ -33,7 +33,7 @@ class Contractor(models.Model):
   phone = PhoneField(blank=True, help_text='Contact phone number')
   email = models.EmailField(max_length=150)
   location = models.CharField(max_length=150)
-  rating = models.IntegerField()
+  rating = models.FloatField(default=0)
   review = models.ForeignKey(Review, on_delete=models.CASCADE)
 
   def __str__(self):
