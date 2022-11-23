@@ -13,6 +13,10 @@
         <p>Location: {{ contractor.location }}</p>
         <p>Rating: {{ contractor.rating }}</p>
       </div>
+      <div class="card-action">
+        <a href="{% url 'contractors_update' contractor.id %}">Edit</a>
+        <a href="{% url 'contractors_delete' contractor.id %}">Delete</a>
+      </div>
     </div>
   </div>
 </div>
