@@ -47,7 +47,18 @@ class ContractorList(LoginRequiredMixin, ListView):
 
 class ContractorDetail(LoginRequiredMixin, DetailView):
   model = Contractor
-  
+
+class ContractorCreate(CreateView):
+  model = Contractor
+  fields = ['name', 'phone', 'email', 'location']
+
+class ContractorUpdate(UpdateView):
+  model = Contractor
+  fields = ['phone', 'email', 'location']
+
+class ContractorDelete(DeleteView):
+  model = Contractor
+  success_url = '/contractors'
 
 
 @login_required
