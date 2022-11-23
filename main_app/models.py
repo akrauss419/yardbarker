@@ -19,7 +19,7 @@ class User(models.Model):
   email = models.EmailField(max_length=150)
   location = models.CharField(max_length=150)
   rating = models.FloatField(default=0)
-  review = models.ForeignKey(Review, on_delete=models.CASCADE)
+  review = models.ForeignKey(Review, default=None, on_delete=models.CASCADE)
 
   def __str__(self):
     return self.name
@@ -34,7 +34,7 @@ class Contractor(models.Model):
   email = models.EmailField(max_length=150)
   location = models.CharField(max_length=150)
   rating = models.FloatField(default=0)
-  review = models.ForeignKey(Review, on_delete=models.CASCADE)
+  # review = models.ForeignKey(Review, default=None, on_delete=models.CASCADE)
 
   def __str__(self):
     return self.name
