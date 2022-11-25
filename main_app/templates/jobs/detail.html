@@ -39,4 +39,47 @@
   </div>
 </div>
 
+<hr>
+<div class="row">
+  <div class="col s6">
+    <h3>{{ job.name }}'s Contractors</h3>
+    {% if job.contractors.count %}
+      {% for contractor in job.contractors.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+               {{ contractor.name }} is currently working on {{ job.name }}
+            </span>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No Contractors </h5>
+    {% endif %}
+  </div>
+</div>
+
+<div class="col s6">
+  <h3>Available Contractors</h3>
+  {% if contractors.count %}
+    {% for contractor in contractors.all %}
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">
+           {{ contractor.name }} is available to work!
+          </span>
+        </div>
+        <div class="card-action">
+          <form action="{% url 'assoc_contractor' job.id contractor.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn">Add</button>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <h5>No More Available Contractors.</h5>
+  {% endif %}
+</div>
+
 {% endblock %}

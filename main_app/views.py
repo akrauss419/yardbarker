@@ -26,10 +26,18 @@ def jobs_index(request):
   })
 
 @login_required
+def assoc_contractor(request, job_id, contractor_id):
+  Job.objects.get(id=job_id).contractors.add(contractor_id)
+  return redirect('detail', job_id = job_id)
+
+@login_required
 def jobs_detail(request, job_id):
   job = Job.objects.get(id=job_id)
+  id_list = job.contractors.all().values_list('id')
+  contractors_available = Contractor.objects.exclude(id__in=id_list)
   return render(request, 'jobs/detail.html', {
-    'job': job
+    'job': job,
+    'contractors': contractors_available
   })
 
 class JobCreate(LoginRequiredMixin, CreateView):
