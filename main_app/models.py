@@ -77,6 +77,7 @@ class UserPhoto(models.Model):
   def __str__(self):
     return f"Photo for User_id: {self.user_id} @{self.url}"
 
+
 class ContractorPhoto(models.Model):
   url = models.CharField(max_length=200)
   user = models.ForeignKey(User, on_delete=models.CASCADE)

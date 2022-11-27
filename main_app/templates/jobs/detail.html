@@ -9,10 +9,8 @@
       <div class="card-content">
         <span class="card-title">{{ job.name }}</span>
         <p>Task: {{ job.task }}</p>
-        <span>
-          <span>Location: {{ job.location }}</span>
-          <span>Reward: ${{ job.reward }}</span>
-        </span>
+        <p>Location: {{ job.location }}</p>
+        <p>Reward: ${{ job.reward }}</p>
         <p>Description: {{ job.description|linebreaks }}</p>
         <span>Is Done:</span>
         <p>Poster: {{ job.posters }}</p>
