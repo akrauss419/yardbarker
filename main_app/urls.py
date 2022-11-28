@@ -17,4 +17,6 @@ urlpatterns = [
   path('contractors/<int:pk>/update/', views.ContractorUpdate.as_view(), name='contractors_update'),
   path('contractors/<int:pk>/delete/', views.ContractorDelete.as_view(), name='contractors_delete'),
   path('accounts/signup/', views.signup, name='signup'),
+  # add review
+  path('contractors/<int:contractor_id>/add_review/', views.add_review, name='add_review'),
 ]

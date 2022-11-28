@@ -9,6 +9,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Job, User, Review, Contractor, JobPhoto, UserPhoto, ContractorPhoto
+from .forms import ReviewForm
+
 
 def home(request):
   return render(request, 'home.html')
@@ -91,3 +93,14 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+#add_review
+@login_required
+def add_review(request, contractor_id):
+  form = ReviewForm(request.POST)
+  if form.is_valid():
+    new_review = form.save(commit=False)
+    new_review.contractor_id = contractor_id
+    new_review.user = request.user
+    new_review.save()
+  return redirect('detail', contractor_id=contractor_id) 
