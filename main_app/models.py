@@ -1,6 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.urls import reverse
-from phone_field import PhoneField 
+from phone_field import PhoneField
 
 
 class Contractor(models.Model):
@@ -37,13 +38,14 @@ class Review(models.Model):
     ordering = ['-date']
 
 
-class User(models.Model):
+class Member(models.Model):
   name = models.CharField(max_length=100)
   phone = PhoneField(blank=True, help_text='Contact phone number')
   email = models.EmailField(max_length=150)
   location = models.CharField(max_length=150)
   rating = models.FloatField(default=0)
   review = models.ForeignKey(Review, default=None, on_delete=models.CASCADE)
+  user = models.OneToOneField(User, on_delete=models.CASCADE)
 
   def __str__(self):
     return self.name
@@ -56,12 +58,11 @@ class Job(models.Model):
   name = models.CharField(max_length=100)
   task = models.CharField(max_length=150)
   location = models.CharField(max_length=100)
-  # aka pricing
   reward = models.IntegerField()
   description = models.TextField(max_length=250)
   isDone = models.BooleanField(default=False)
   # M:M users
-  posters = models.CharField(max_length=100)
+  member = models.ForeignKey(Member, default=None, on_delete=models.CASCADE)
   contractors = models.ManyToManyField(Contractor)
 
   def __str__(self):
@@ -79,12 +80,12 @@ class JobPhoto(models.Model):
     return f"Photo for job_id: {self.job_id} @{self.url}"
 
 
-class UserPhoto(models.Model):
+class MemberPhoto(models.Model):
   url = models.CharField(max_length=200)
-  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  member = models.ForeignKey(Member, on_delete=models.CASCADE)
 
   def __str__(self):
-    return f"Photo for User_id: {self.user_id} @{self.url}"
+    return f"Photo for Member_id: {self.member_id} @{self.url}"
 
 
 class ContractorPhoto(models.Model):

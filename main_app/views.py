@@ -8,7 +8,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Job, User, Review, Contractor, JobPhoto, UserPhoto, ContractorPhoto
+from .models import Job, Member, Review, Contractor, JobPhoto, MemberPhoto, ContractorPhoto
 from .forms import ReviewForm
 
 
@@ -17,6 +17,14 @@ def home(request):
 
 def about(request):
   return render(request, 'about.html')
+
+@login_required
+def member_detail(request):
+  # current_id = request.user.id
+  member = request.user
+  return render(request, 'member_detail.html', {
+    'member': member
+  })
 
 @login_required
 def jobs_index(request):
