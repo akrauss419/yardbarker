@@ -5,7 +5,6 @@ from phone_field import PhoneField
 from django import forms
 
 
-
 class Contractor(models.Model):
     name = models.CharField(max_length=100)
     phone = PhoneField(blank=True, help_text='Contact phone number')
@@ -42,37 +41,37 @@ class Review(models.Model):
 
 
 class Member(models.Model):
-  name = models.CharField(max_length=100)
-  phone = PhoneField(blank=True, help_text='Contact phone number')
-  email = models.EmailField(max_length=150)
-  location = models.CharField(max_length=150)
-  rating = models.FloatField(default=0)
-  review = models.ForeignKey(Review, default=None, on_delete=models.CASCADE)
-  user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    phone = PhoneField(blank=True, help_text='Contact phone number')
+    email = models.EmailField(max_length=150)
+    location = models.CharField(max_length=150)
+    rating = models.FloatField(default=0)
+    review = models.ForeignKey(Review, default=None, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+      return self.name
 
     def get_absolute_url(self):
-        return reverse('user_detail', kwargs={'pk': self.id})
+      return reverse('user_detail', kwargs={'pk': self.id})
 
 
 class Job(models.Model):
-  name = models.CharField(max_length=100)
-  task = models.CharField(max_length=150)
-  location = models.CharField(max_length=100)
-  reward = models.IntegerField()
-  description = models.TextField(max_length=250)
-  isDone = models.BooleanField(default=False)
-  # M:M users
-  member = models.ForeignKey(Member, default=None, on_delete=models.CASCADE)
-  contractors = models.ManyToManyField(Contractor)
+    name = models.CharField(max_length=100)
+    task = models.CharField(max_length=150)
+    location = models.CharField(max_length=100)
+    reward = models.IntegerField()
+    description = models.TextField(max_length=250)
+    isDone = models.BooleanField(default=False)
+    # M:M users
+    member = models.ForeignKey(Member, default=None, on_delete=models.CASCADE)
+    contractors = models.ManyToManyField(Contractor)
 
     def __str__(self):
-        return f'{self.name} ({self.id})'
+      return f'{self.name} ({self.id})'
 
     def get_absolute_url(self):
-        return reverse('detail', kwargs={'job_id': self.id})
+      return reverse('detail', kwargs={'job_id': self.id})
 
 
 class JobPhoto(models.Model):
@@ -84,11 +83,11 @@ class JobPhoto(models.Model):
 
 
 class MemberPhoto(models.Model):
-  url = models.CharField(max_length=200)
-  member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    url = models.CharField(max_length=200)
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
 
-  def __str__(self):
-    return f"Photo for Member_id: {self.member_id} @{self.url}"
+    def __str__(self):
+        return f"Photo for Member_id: {self.member_id} @{self.url}"
 
 
 class ContractorPhoto(models.Model):
