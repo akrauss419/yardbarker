@@ -102,7 +102,18 @@ def add_contractor_photo(request, contractor_id):
     except Exception as e:
       print('An error occurred uploading file to S3')
       print(e)
-    return redirect('contractors_detail', contractor_id=contractor_id)
+    return redirect('contractors_detail', pk=contractor_id)
+
+
+@login_required
+def add_review(request, contractor_id):
+  form = ReviewForm(request.POST)
+  if form.is_valid():
+    new_review = form.save(commit=False)
+    new_review.contractor_id = contractor_id
+    new_review.user = request.user
+    new_review.save()
+  return redirect('detail', contractor_id=contractor_id) 
 
 
 def signup(request):
@@ -118,14 +129,3 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
-
-#add_review
-@login_required
-def add_review(request, contractor_id):
-  form = ReviewForm(request.POST)
-  if form.is_valid():
-    new_review = form.save(commit=False)
-    new_review.contractor_id = contractor_id
-    new_review.user = request.user
-    new_review.save()
-  return redirect('detail', contractor_id=contractor_id) 
