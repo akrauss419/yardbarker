@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-
-  <h1>Create your Member Profile Now!</h1>
-  <form action="" method="POST">
-    
-  </form>
+<h1>Become a Member</h1>
+<form action="{% url 'members_create'%}" method="POST">
+  {% csrf_token %}
+  <!-- Render the inputs -->
+  {{ member_create_form.as_p }}
+  <input type="submit" class="btn" value="Join!">
+</form>
 
 {% endblock %}

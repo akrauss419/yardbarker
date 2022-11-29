@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="{% url 'jobs_create'%}" method="POST">
+  {% csrf_token %}
+  <!-- Render the inputs -->
+  {{ job_create_form.as_p }}
+  <input type="submit" class="btn" value="Add Job">
+</form>
+
+{% endblock %}
