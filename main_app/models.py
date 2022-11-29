@@ -5,8 +5,6 @@ from phone_field import PhoneField
 from django import forms
 
 
-
-
 class Contractor(models.Model):
   name = models.CharField(max_length=100)
   phone = PhoneField(blank=True, help_text='Contact phone number')
@@ -18,8 +16,7 @@ class Contractor(models.Model):
     return self.name
 
   def get_absolute_url(self):
-    return reverse('contractors_detail', kwargs={'pk': self.id})
-
+    return reverse('contractors_detail', kwargs={'contractor_id': self.id})
 
 
 class Member(models.Model):
@@ -29,12 +26,12 @@ class Member(models.Model):
   location = models.CharField(max_length=150)
   rating = models.FloatField(default=0)
   user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
-
   def __str__(self):
     return self.name
 
   def get_absolute_url(self):
     return reverse('user_detail', kwargs={'pk': self.id})
+
 
 class Review(models.Model):
   RATING_CHOICES = (
