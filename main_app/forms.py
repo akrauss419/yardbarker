@@ -8,7 +8,7 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['rating', 'review']
 
-        widgets = {
-            'rating': forms.Select(attrs={'class': 'form-control'}),
-            'review': forms.Textarea(attrs={'class': 'form-control'}),
-        }
+        # widgets = {
+        #     'rating': forms.Select(attrs={'class': 'form-control'}),
+        #     'review': forms.Textarea(attrs={'class': 'form-control'}),
+        # }

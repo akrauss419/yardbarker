@@ -14,11 +14,12 @@ urlpatterns = [
   path('jobs/<int:job_id>/add_job_photo', views.add_job_photo, name='add_job_photo'),
   path('jobs/<int:job_id>/assoc_contractor/<int:contractor_id>/', views.assoc_contractor, name='assoc_contractor'),
   path('contractors/', views.ContractorList.as_view(), name='contractors_index'),
-  path('contractors/<int:pk>/', views.ContractorDetail.as_view(), name='contractors_detail'),
+  # path('contractors/<int:pk>/', views.ContractorDetail.as_view(), name='contractors_detail'),
   path('contractors/create/', views.ContractorCreate.as_view(), name='contractors_create'),
   path('contractors/<int:pk>/update/', views.ContractorUpdate.as_view(), name='contractors_update'),
   path('contractors/<int:pk>/delete/', views.ContractorDelete.as_view(), name='contractors_delete'),
   path('contractors/<int:contractor_id>/add_contractor_photo', views.add_contractor_photo, name='add_contractor_photo'),
   path('contractors/<int:contractor_id>/add_review/', views.add_review, name='add_review'),
   path('accounts/signup/', views.signup, name='signup'),
+  path('contractors/<int:contractor_id>/', views.contractors_detail, name='contractors_detail'),
 ]

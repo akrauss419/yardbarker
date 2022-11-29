@@ -2,40 +2,44 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from phone_field import PhoneField
+from django import forms
+
+
 
 
 class Contractor(models.Model):
-  name = models.CharField(max_length=100)
-  phone = PhoneField(blank=True, help_text='Contact phone number')
-  email = models.EmailField(max_length=150)
-  location = models.CharField(max_length=150)
-  rating = models.FloatField(default=0)
+    name = models.CharField(max_length=100)
+    phone = PhoneField(blank=True, help_text='Contact phone number')
+    email = models.EmailField(max_length=150)
+    location = models.CharField(max_length=150)
+    rating = models.FloatField(default=0)
 
-  def __str__(self):
-    return self.name
+    def __str__(self):
+        return self.name
 
-  def get_absolute_url(self):
-    return reverse('contractors_detail', kwargs={'pk': self.id})
+    def get_absolute_url(self):
+        return reverse('contractors_detail', kwargs={'pk': self.id})
+
 
 class Review(models.Model):
-  RATING_CHOICES = (
-    ('1', '⭐️'),
-    ('2', '⭐️⭐️'),
-    ('3', '⭐️⭐️⭐️'),
-    ('4', '⭐️⭐️⭐️⭐️'),
-    ('5', '⭐️⭐️⭐️⭐️⭐️')
-  )
+    RATING_CHOICES = (
+        (1, '⭐️'),
+        (2, '⭐️⭐️'),
+        (3, '⭐️⭐️⭐️'),
+        (4, '⭐️⭐️⭐️⭐️'),
+        (5, '⭐️⭐️⭐️⭐️⭐️')
+    )
 
-  date = models.DateField(auto_now_add=True)
-  rating = models.CharField(max_length=1, choices=RATING_CHOICES, blank=True)
-  review = models.TextField(max_length=200, blank=True)
-  contractor = models.ForeignKey(Contractor, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
+    rating = models.CharField(max_length=1, choices=RATING_CHOICES, blank=True)
+    review = models.TextField(max_length=200, blank=True)
+    contractor = models.ForeignKey(Contractor, on_delete=models.CASCADE)
 
-  def __str__(self):
+    def __str__(self):
         return f'{self.contractor} - {self.rating}'
 
-  class Meta:
-    ordering = ['-date']
+    class Meta:
+        ordering = ['-date']
 
 
 class Member(models.Model):
@@ -47,11 +51,11 @@ class Member(models.Model):
   review = models.ForeignKey(Review, default=None, on_delete=models.CASCADE)
   user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-  def __str__(self):
-    return self.name
+    def __str__(self):
+      return self.name
 
-  def get_absolute_url(self):
-    return reverse('user_detail', kwargs={'pk': self.id})
+    def get_absolute_url(self):
+      return reverse('user_detail', kwargs={'pk': self.id})
 
 
 class Job(models.Model):
@@ -65,19 +69,19 @@ class Job(models.Model):
   member = models.ForeignKey(Member, default=None, on_delete=models.CASCADE)
   contractors = models.ManyToManyField(Contractor)
 
-  def __str__(self):
-     return f'{self.name} ({self.id})'
+    def __str__(self):
+      return f'{self.name} ({self.id})'
 
-  def get_absolute_url(self):
-    return reverse('detail', kwargs={'job_id': self.id})
+    def get_absolute_url(self):
+      return reverse('detail', kwargs={'job_id': self.id})
 
 
 class JobPhoto(models.Model):
-  url = models.CharField(max_length=200)
-  job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    url = models.CharField(max_length=200)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
 
-  def __str__(self):
-    return f"Photo for job_id: {self.job_id} @{self.url}"
+    def __str__(self):
+        return f"Photo for job_id: {self.job_id} @{self.url}"
 
 
 class MemberPhoto(models.Model):

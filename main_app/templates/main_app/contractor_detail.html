@@ -30,55 +30,53 @@
       <button type="submit" class="btn">Upload Photo</button>
     </form>
   </div>
-  <!-- review section -->
-  <div>
-    <h3 class="">Reviews</h3>
-    <h5 class="">Average: {{average}} ⭐️ </h5>
-  </div>
-  <hr>
-  <br>
-  <section id="reviews" class="row">
-    <div class="">
-      <table class="">
-        <thead>
-          <tr>
-            <th><strong>User</strong></th>
-            <th style="width:125px"><strong>Rating</strong></th>
-            <th><strong>Review</strong></th>
-            <th style="width:75px"><strong>Date</strong></th>
-          </tr>
-        </thead>
-        {% if contractor.review_set.count %}
-          {% for review in contractor.review_set.all%}
-          <tbody>
-            <tr>
-              <td>{{review.user}}</td>
-              <td>{{review.get_rating_display}}</td>
-              <td>{{review.review}}</td>
-              <td>{{review.date}}</td>
-            </tr>
-          </tbody>
-          {% endfor %}
-      </table>
-      {% else %}
-      </table>
-      <p>Tell us your recent expirience with this contractor!</p>
-      {% endif %}
-    </div>
-    {% if user.is_authenticated %}
-    <div class="">
-      <form action="{% url 'add_review' contractor.id %}" method="POST">
-        {% csrf_token %}
-        {{review_form.as_p}}
-        <div class="">
-          <button class="" type="submit">
-            Add Review
-          </button>
-        </div>
-      </form>
-    </div>
-    {% endif %}
-  </section>
-  <!-- review section -->
 </div>
+<!-- review section -->
+<br>
+<div>
+  <h3 class="">Reviews</h3>
+  <h5 class="">Average: {{average}} ⭐️ </h5>
+</div>
+<hr>
+<br>
+<section id="reviews" class="row">
+  <div class="col 8 col-offset-2">
+    <table class="striped">
+      <thead>
+        <tr>
+          <th><strong>User</strong></th>
+          <th style="width:125px"><strong>Rating</strong></th>
+          <th><strong>Review</strong></th>
+          <th style="width:75px"><strong>Date</strong></th>
+        </tr>
+      </thead>
+      {% if contractor.review_set.count %} {% for review in contractor.review_set.all%}
+      <tbody>
+        <tr>
+          <td>{{review.user}}</td>
+          <td>{{review.get_rating_display}}</td>
+          <td>{{review.review}}</td>
+          <td>{{review.date}}</td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+    {% else %}
+    </table>
+    <p>Tell us your recent expirience with this contractor!</p>
+    {% endif %}
+  </div>
+  {% if user.is_authenticated %}
+  <div class="form-group col 4 col-offset-4">
+    <form action="{% url 'add_review' contractor.id %}" method="POST">
+      {% csrf_token %}
+      {{ review_form.as_p }}
+      <button class="btn btn-primary" type="submit">
+        Add Review
+      </button>
+    </form>
+  </div>
+  {% endif %}
+</section>
+<!-- review section -->
 {% endblock %}
