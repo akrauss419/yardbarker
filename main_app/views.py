@@ -54,7 +54,7 @@ def jobs_detail(request, job_id):
 
 class JobCreate(LoginRequiredMixin, CreateView):
   model = Job
-  fields = ['name', 'task', 'location', 'reward', 'description', 'posters']
+  fields = ['name', 'task', 'location', 'reward', 'description', 'member']
 
 
 class JobUpdate(LoginRequiredMixin, UpdateView):
