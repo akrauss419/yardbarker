@@ -37,10 +37,12 @@ def jobs_index(request):
     'jobs': jobs
   })
 
+
 @login_required
 def assoc_contractor(request, job_id, contractor_id):
   Job.objects.get(id=job_id).contractors.add(contractor_id)
   return redirect('detail', job_id = job_id)
+
 
 @login_required
 def jobs_detail(request, job_id):
@@ -51,10 +53,6 @@ def jobs_detail(request, job_id):
     'job': job,
     'contractors': contractors_available
   })
-
-# class JobCreate(LoginRequiredMixin, CreateView):
-#   model = Job
-#   fields = ['name', 'task', 'location', 'reward', 'description']
 
 
 class JobUpdate(LoginRequiredMixin, UpdateView):
@@ -89,14 +87,10 @@ class ContractorDelete(LoginRequiredMixin, DeleteView):
   model = Contractor
   success_url = '/contractors'
 
-  
-# class MemberCreate(CreateView):
-#   model = Member
-#   fields = ['name', 'phone', 'email', 'location']
 
 def jobs_create(request):
   current_id = request.user.id
-  member = User.objects.get(id=current_id)
+  member = Member.objects.get(user=request.user)
   error_message = ''
   job_create_form = JobCreateForm()
   if request.method == 'POST':
@@ -105,17 +99,16 @@ def jobs_create(request):
       new_job = form.save(commit=False)
       new_job.isDone = False
       new_job.member = member
-      new_job.contractors = []
       new_job.save()
       return redirect('detail', job_id=new_job.id)
     else:
       error_message = 'You are not a member or this is an invalid form'
-  # context = {'form': job_create_form, 'error_message': error_message}
   return render(request, 'jobs/create.html', {
     'member': member,
     'job_create_form': job_create_form,
     'error_message': error_message
   })
+
 
 def member_create(request):
   current_id = request.user.id
@@ -125,13 +118,11 @@ def member_create(request):
     form = MemberCreateForm(request.POST)
     if form.is_valid():
       new_member = form.save(commit=False)
-      # new_member.review = []
       new_member.user = request.user
       new_member.save()
       return redirect('member_detail')
     else:
       error_message = 'You are not a member or this is an invalid form'
-  # context = {'form': job_create_form, 'error_message': error_message}
   return render(request, 'member_create.html', {
     'member_create_form': member_create_form,
     'error_message': error_message
@@ -175,7 +166,7 @@ def add_contractor_photo(request, contractor_id):
     except Exception as e:
       print('An error occurred uploading file to S3')
       print(e)
-    return redirect('contractors_detail', pk=contractor_id)
+    return redirect('contractors_detail', contractor_id=contractor_id)
 
 
 @login_required
@@ -196,7 +187,6 @@ def add_review(request, contractor_id):
 def contractors_detail(request, contractor_id):
   contractor = Contractor.objects.get(id=contractor_id)
   contractor_rev = Review.objects.filter(contractor=contractor_id)
-  # contractor_photo = ContractorPhoto.objects.get(id=contractor_id)
   sum = 0
   for review in contractor_rev:
     print(f"rating: {float(review.rating)}")
@@ -210,7 +200,6 @@ def contractors_detail(request, contractor_id):
     'contractor': contractor,
     'review_form': form,
     'average': average,
-    # 'photo': contractor_photo
   })
 
 

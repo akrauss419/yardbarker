@@ -8,15 +8,12 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['rating', 'content']
 
-        # widgets = {
-        #     'rating': forms.Select(attrs={'class': 'form-control'}),
-        #     'review': forms.Textarea(attrs={'class': 'form-control'}),
-        # }
 
 class JobCreateForm(forms.ModelForm):
   class Meta:
     model = Job
     fields = ['name', 'task', 'location', 'reward', 'description']
+
 
 class MemberCreateForm(forms.ModelForm):
   class Meta:

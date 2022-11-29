@@ -11,7 +11,7 @@
         <p>Phone Number: {{ contractor.phone }}</p>
         <p>Email: {{ contractor.email }}</p>
         <p>Location: {{ contractor.location }}</p>
-        <p>Rating: {{ contractor.rating }}</p>
+        <p>Rating: {{ average }}</p>
       </div>
       <div class="card-action">
         <a href="{% url 'contractors_update' contractor.id %}">Edit</a>
