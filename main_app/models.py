@@ -66,7 +66,7 @@ class Job(models.Model):
   description = models.TextField(max_length=250)
   isDone = models.BooleanField(default=False)
   # M:M users
-  # member = models.ForeignKey(Member, default=None, on_delete=models.CASCADE)
+  member = models.ForeignKey(Member, default=None, on_delete=models.CASCADE)
   contractors = models.ManyToManyField(Contractor)
 
   def __str__(self):
