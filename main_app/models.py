@@ -38,16 +38,16 @@ class Member(models.Model):
 
 class Review(models.Model):
   RATING_CHOICES = (
-    (1, '⭐️'),
-    (2, '⭐️⭐️'),
-    (3, '⭐️⭐️⭐️'),
-    (4, '⭐️⭐️⭐️⭐️'),
-    (5, '⭐️⭐️⭐️⭐️⭐️')
+    ('1', '⭐️'),
+    ('2', '⭐️⭐️'),
+    ('3', '⭐️⭐️⭐️'),
+    ('4', '⭐️⭐️⭐️⭐️'),
+    ('5', '⭐️⭐️⭐️⭐️⭐️')
   )
 
   date = models.DateField(auto_now_add=True)
   rating = models.CharField(max_length=1, choices=RATING_CHOICES, blank=True)
-  review = models.TextField(max_length=200, blank=True)
+  content = models.TextField(max_length=500, blank=True)
   contractor = models.ForeignKey(Contractor, on_delete=models.CASCADE)
   member = models.ForeignKey(Member, default=None, on_delete=models.CASCADE)
 

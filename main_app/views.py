@@ -181,12 +181,16 @@ def add_contractor_photo(request, contractor_id):
 @login_required
 def add_review(request, contractor_id):
   form = ReviewForm(request.POST)
+  curr_contractor = Contractor.objects.get(id=contractor_id)
+  print(request.user)
+  curr_member = Member.objects.get(user=request.user)
   if form.is_valid():
     new_review = form.save(commit=False)
-    new_review.contractor_id = contractor_id
-    new_review.user = request.user
+    new_review.contractor = curr_contractor
+    new_review.member = curr_member
     new_review.save()
-  return redirect('contractors_detail', pk=contractor_id)
+    print(new_review)
+  return redirect('contractors_detail', contractor_id=contractor_id)
 
 
 def contractors_detail(request, contractor_id):
