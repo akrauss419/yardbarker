@@ -49,7 +49,7 @@ class Member(models.Model):
   location = models.CharField(max_length=150)
   rating = models.FloatField(default=0)
   review = models.ForeignKey(Review, default=None, on_delete=models.CASCADE)
-  user = models.OneToOneField(User, on_delete=models.CASCADE)
+  user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
 
   def __str__(self):
     return self.name
