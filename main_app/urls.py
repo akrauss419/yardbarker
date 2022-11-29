@@ -21,6 +21,5 @@ urlpatterns = [
   path('contractors/<int:contractor_id>/add_contractor_photo', views.add_contractor_photo, name='add_contractor_photo'),
   path('contractors/<int:contractor_id>/add_review/', views.add_review, name='add_review'),
   path('accounts/signup/', views.signup, name='signup'),
-
   path('contractors/<int:contractor_id>/', views.contractors_detail, name='contractors_detail'),
 ]

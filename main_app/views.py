@@ -28,30 +28,28 @@ def member_detail(request):
     'member': member
   })
 
+
 @login_required
 def jobs_index(request):
-    jobs = Job.objects.filter(isDone=False)
-    return render(request, 'jobs/index.html', {
-        'jobs': jobs
-    })
-
+  jobs = Job.objects.filter(isDone=False)
+  return render(request, 'jobs/index.html', {
+    'jobs': jobs
+  })
 
 @login_required
 def assoc_contractor(request, job_id, contractor_id):
-    Job.objects.get(id=job_id).contractors.add(contractor_id)
-    return redirect('detail', job_id=job_id)
-
+  Job.objects.get(id=job_id).contractors.add(contractor_id)
+  return redirect('detail', job_id = job_id)
 
 @login_required
 def jobs_detail(request, job_id):
-    job = Job.objects.get(id=job_id)
-    id_list = job.contractors.all().values_list('id')
-    contractors_available = Contractor.objects.exclude(id__in=id_list)
-    return render(request, 'jobs/detail.html', {
-        'job': job,
-        'contractors': contractors_available
-    })
-
+  job = Job.objects.get(id=job_id)
+  id_list = job.contractors.all().values_list('id')
+  contractors_available = Contractor.objects.exclude(id__in=id_list)
+  return render(request, 'jobs/detail.html', {
+    'job': job,
+    'contractors': contractors_available
+  })
 
 class JobCreate(LoginRequiredMixin, CreateView):
     model = Job
@@ -111,21 +109,19 @@ def add_job_photo(request, job_id):
 
 @login_required
 def add_contractor_photo(request, contractor_id):
-    photo_file = request.FILES.get('photo-file', None)
-    if photo_file:
-        s3 = boto3.client('s3')
-        key = uuid.uuid4().hex[:6] + \
-            photo_file.name[photo_file.name.rfind('.'):]
-        try:
-            bucket = os.environ['S3_BUCKET']
-            s3.upload_fileobj(photo_file, bucket, key)
-            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
-            ContractorPhoto.objects.create(
-                url=url, contractor_id=contractor_id)
-        except Exception as e:
-            print('An error occurred uploading file to S3')
-            print(e)
-        return redirect('contractors_detail', pk=contractor_id)
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      bucket = os.environ['S3_BUCKET']
+      s3.upload_fileobj(photo_file, bucket, key)
+      url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+      ContractorPhoto.objects.create(url=url, contractor_id=contractor_id)
+    except Exception as e:
+      print('An error occurred uploading file to S3')
+      print(e)
+    return redirect('contractors_detail', pk=contractor_id)
 
 
 @login_required
@@ -161,15 +157,15 @@ def contractors_detail(request, contractor_id):
 
 
 def signup(request):
-    error_message = ''
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('index')
-        else:
-            error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
-    context = {'form': form, 'error_message': error_message}
-    return render(request, 'registration/signup.html', context)
+  error_message = ''
+  if request.method == 'POST':
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      user = form.save()
+      login(request, user)
+      return redirect('index')
+    else:
+      error_message = 'Invalid sign up - try again'
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'registration/signup.html', context)
