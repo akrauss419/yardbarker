@@ -199,8 +199,8 @@ def contractors_detail(request, contractor_id):
   # contractor_photo = ContractorPhoto.objects.get(id=contractor_id)
   sum = 0
   for review in contractor_rev:
-    print(type(review.rating))
-    # sum += float(review.rating)
+    print(f"rating: {float(review.rating)}")
+    sum += float(review.rating)
   if sum == 0:
     average = 0
   else:
