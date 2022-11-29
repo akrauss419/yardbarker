@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Job, Member, Review, Contractor, JobPhoto, MemberPhoto, ContractorPhoto
 from .forms import ReviewForm
+from django.contrib.auth.models import User
 
 
 def home(request):
@@ -22,8 +23,8 @@ def about(request):
 
 @login_required
 def member_detail(request):
-  # current_id = request.user.id
-  member = request.user
+  current_id = request.user.id
+  member = User.objects.get(id=current_id)
   return render(request, 'member_detail.html', {
     'member': member
   })
@@ -89,9 +90,12 @@ class ContractorDelete(LoginRequiredMixin, DeleteView):
   success_url = '/contractors'
 
   
-class MemberCreate(CreateView):
-  model = Member
-  fields = ['name', 'phone', 'email', 'location']
+# class MemberCreate(CreateView):
+#   model = Member
+#   fields = ['name', 'phone', 'email', 'location']
+
+def member_create(request):
+  return render(request, 'member_create.html', request.user.id)
 
 
 class MemberUpdate(UpdateView):
