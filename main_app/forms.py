@@ -6,7 +6,7 @@ from .models import Review, Job, Member
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['rating', 'review']
+        fields = ['rating', 'content']
 
         # widgets = {
         #     'rating': forms.Select(attrs={'class': 'form-control'}),

@@ -50,16 +50,17 @@
           <th style="width:75px"><strong>Date</strong></th>
         </tr>
       </thead>
-      {% if contractor.review_set.count %} {% for review in contractor.review_set.all%}
-      <tbody>
-        <tr>
-          <td>{{review.user}}</td>
-          <td>{{review.get_rating_display}}</td>
-          <td>{{review.review}}</td>
-          <td>{{review.date}}</td>
-        </tr>
-      </tbody>
-      {% endfor %}
+      {% if contractor.review_set.count %} 
+        {% for review in contractor.review_set.all%}
+        <tbody>
+          <tr>
+            <td>{{review.member}}</td>
+            <td>{{review.get_rating_display}}</td>
+            <td>{{review.content}}</td>
+            <td>{{review.date}}</td>
+          </tr>
+        </tbody>
+        {% endfor %}
     </table>
     {% else %}
     </table>
@@ -79,4 +80,9 @@
   {% endif %}
 </section>
 <!-- review section -->
+<script>
+
+const selectEl = document.getElementById('id_rating');
+M.FormSelect.init(selectEl);
+</script>
 {% endblock %}
