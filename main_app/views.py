@@ -9,7 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Job, Member, Review, Contractor, JobPhoto, MemberPhoto, ContractorPhoto
-from .forms import ReviewForm
+from .forms import ReviewForm, JobCreateForm, MemberCreateForm
 from django.contrib.auth.models import User
 
 
@@ -23,8 +23,8 @@ def about(request):
 
 @login_required
 def member_detail(request):
-  current_id = request.user.id
-  member = User.objects.get(id=current_id)
+  # current_id = request.user.id
+  member = Member.objects.get(user=request.user)
   return render(request, 'member_detail.html', {
     'member': member
   })
@@ -52,9 +52,9 @@ def jobs_detail(request, job_id):
     'contractors': contractors_available
   })
 
-class JobCreate(LoginRequiredMixin, CreateView):
-  model = Job
-  fields = ['name', 'task', 'location', 'reward', 'description', 'member']
+# class JobCreate(LoginRequiredMixin, CreateView):
+#   model = Job
+#   fields = ['name', 'task', 'location', 'reward', 'description']
 
 
 class JobUpdate(LoginRequiredMixin, UpdateView):
@@ -94,8 +94,48 @@ class ContractorDelete(LoginRequiredMixin, DeleteView):
 #   model = Member
 #   fields = ['name', 'phone', 'email', 'location']
 
+def jobs_create(request):
+  current_id = request.user.id
+  member = User.objects.get(id=current_id)
+  error_message = ''
+  job_create_form = JobCreateForm()
+  if request.method == 'POST':
+    form = JobCreateForm(request.POST)
+    if form.is_valid():
+      new_job = form.save(commit=False)
+      new_job.isDone = False
+      new_job.member = member
+      new_job.contractors = []
+      new_job.save()
+      return redirect('detail', job_id=new_job.id)
+    else:
+      error_message = 'You are not a member or this is an invalid form'
+  # context = {'form': job_create_form, 'error_message': error_message}
+  return render(request, 'jobs/create.html', {
+    'member': member,
+    'job_create_form': job_create_form,
+    'error_message': error_message
+  })
+
 def member_create(request):
-  return render(request, 'member_create.html', request.user.id)
+  current_id = request.user.id
+  error_message = ''
+  member_create_form = MemberCreateForm()
+  if request.method == 'POST':
+    form = MemberCreateForm(request.POST)
+    if form.is_valid():
+      new_member = form.save(commit=False)
+      # new_member.review = []
+      new_member.user = request.user
+      new_member.save()
+      return redirect('member_detail')
+    else:
+      error_message = 'You are not a member or this is an invalid form'
+  # context = {'form': job_create_form, 'error_message': error_message}
+  return render(request, 'member_create.html', {
+    'member_create_form': member_create_form,
+    'error_message': error_message
+  })
 
 
 class MemberUpdate(UpdateView):
@@ -177,7 +217,7 @@ def signup(request):
     if form.is_valid():
       user = form.save()
       login(request, user)
-      return redirect('index')
+      return redirect('members_create')
     else:
       error_message = 'Invalid sign up - try again'
   form = UserCreationForm()

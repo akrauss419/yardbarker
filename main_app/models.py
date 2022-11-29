@@ -21,6 +21,21 @@ class Contractor(models.Model):
     return reverse('contractors_detail', kwargs={'pk': self.id})
 
 
+
+class Member(models.Model):
+  name = models.CharField(max_length=100)
+  phone = PhoneField(blank=True, help_text='Contact phone number')
+  email = models.EmailField(max_length=150)
+  location = models.CharField(max_length=150)
+  rating = models.FloatField(default=0)
+  user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.name
+
+  def get_absolute_url(self):
+    return reverse('user_detail', kwargs={'pk': self.id})
+
 class Review(models.Model):
   RATING_CHOICES = (
     (1, '⭐️'),
@@ -34,28 +49,13 @@ class Review(models.Model):
   rating = models.CharField(max_length=1, choices=RATING_CHOICES, blank=True)
   review = models.TextField(max_length=200, blank=True)
   contractor = models.ForeignKey(Contractor, on_delete=models.CASCADE)
+  member = models.ForeignKey(Member, default=None, on_delete=models.CASCADE)
 
   def __str__(self):
     return f'{self.contractor} - {self.rating}'
 
   class Meta:
     ordering = ['-date']
-
-
-class Member(models.Model):
-  name = models.CharField(max_length=100)
-  phone = PhoneField(blank=True, help_text='Contact phone number')
-  email = models.EmailField(max_length=150)
-  location = models.CharField(max_length=150)
-  rating = models.FloatField(default=0)
-  review = models.ForeignKey(Review, default=None, on_delete=models.CASCADE)
-  user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
-
-  def __str__(self):
-    return self.name
-
-  def get_absolute_url(self):
-    return reverse('user_detail', kwargs={'pk': self.id})
 
 
 class Job(models.Model):
