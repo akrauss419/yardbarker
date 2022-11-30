@@ -1,21 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Job List</h1>
+<div class="profile_page"> 
+  <h1>Job List</h1>
 
-{% for job in jobs %}
-  <a href="{% url 'detail' job.id %}">
-    <div class="card">
-      <div class="card-content">
-        <span class="card-title">{{ job.name }}</span>
-        <p>Task: {{ job.task }}</p>
-        <p>Location: {{ job.location }}</p>
-        <p>Reward: ${{ job.reward }}</p>
-        <p>Description: {{ job.description|linebreaks }}</p>
-        <span>Is Done:</span>
+  {% for job in jobs %}
+    <a href="{% url 'detail' job.id %}">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">{{ job.name }}</span>
+          <p><span>Task: </span>{{ job.task }}</p>
+          <p><span>Location: </span>{{ job.location }}</p>
+          <p><span>Reward: </span>${{ job.reward }}</p>
+          <p><span>Description: </span>{{ job.description }}</p>
+          <span>Is Done:</span>
+        </div>
       </div>
-    </div>
-  </a>
-{% endfor %}
+    </a>
+  {% endfor %}
+</div>
+
 
 {% endblock %}

@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Contractor List</h1>
+<div class="profile_page">
+  <h1>Contractor List</h1>
 
-{% for contractor in contractor_list %}
-  <a href="{% url 'contractors_detail' contractor.id %}">
-    <div class="card">
-        <div class="card-content">
-            <span class="card-title">{{ contractor.name }}</span>
-            <p>Location: {{ contractor.location }}</p>
-            <p>Rating: {{ contractor.rating }}</p>
-        </div>
-    </div>
-  </a>
-{% endfor %}
+  {% for contractor in contractor_list %}
+    <a href="{% url 'contractors_detail' contractor.id %}">
+      <div class="card">
+          <div class="card-content">
+              <span class="card-title">{{ contractor.name }}</span>
+              <p><span>Location: </span>{{ contractor.location }}</p>
+              <p><span>Rating: </span>{{ contractor.rating }}</p>
+          </div>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+
 
 {% endblock %}

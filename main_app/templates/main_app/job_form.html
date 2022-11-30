@@ -1,17 +1,26 @@
 {% extends 'base.html' %}
-
 {% block content %}
-  <!-- {% if object %}  -->
-    <h1>Edit <span class="teal-text">{{ object.name }}</span></h1>
-<!-- {% else %} -->
+
+<div class="profile_page">
+  {% if object %} 
+    <h1>Edit {{object.name}}</h1>
+  {% else %}
     <h1>Add Job</h1>
-<!-- {% endif %} -->
-<form action="" method="POST" id="job-form">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
-  <p>*Please add photos of your job (if applicable) after hitting submit and successfully adding your job.</p>
-  <input type="submit" value="SUBMIT" class="btn">
-</form>
+  {% endif %}
+
+  <form action="" method="POST" id="job-form">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <p>*Please add photos of your job (if applicable) after hitting submit and successfully adding your job.</p>
+    <input type="submit" value="SUBMIT" class="btn">
+  </form>
+</div>
+
+<script>
+  const selectEl = document.getElementById('id_isDone');
+  M.FormSelect.init(selectEl);
+</script>
+
 {% endblock %}
