@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form action="{% url 'jobs_create'%}" method="POST">
-  {% csrf_token %}
-  <!-- Render the inputs -->
-  {{ job_create_form.as_p }}
-  <input type="submit" class="btn" value="Add Job">
-</form>
+
+
+<div class="profile_page">
+  <h1>Add Job</h1>
+  <form action="{% url 'jobs_create'%}" method="POST">
+    {% csrf_token %}
+    <!-- Render the inputs -->
+    {{ job_create_form.as_p }}
+    <p class="disclaimer">*Please add photos of your job (if applicable) after hitting submit and successfully adding your job.</p>
+    <input type="submit" class="btn" value="Add Job" id="job_submit">
+  </form>
+</div>
+
 
 {% endblock %}

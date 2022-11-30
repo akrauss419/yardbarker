@@ -138,8 +138,13 @@ span {
   font-weight: bold;
 }
 
-.card-title, h1 {
+.card-title, h1, h2 {
   font-family: 'Rubik Marker Hatch', cursive;
+}
+
+.card-title {
+  font-size: 5vmin !important;
+  color: #6D9886;
 }
 
 h4 {
@@ -156,4 +161,31 @@ h4 {
 
 #job_photo {
   margin-top: 5vh;
+}
+
+#available_con {
+  margin-left: 1vw;
+}
+
+#reviews_top {
+  margin-left: 1vw;
+}
+
+.card-content > p {
+  margin-left: 2vmin !important;
+}
+
+#user_name {
+  font-size: 12vmin;
+}
+
+.job_progress {
+  font-size: 6vmin;
+}
+
+.disclaimer {
+  font-weight: bold;
+}
+#job_submit {
+  margin-top: 2vmin;
 }
