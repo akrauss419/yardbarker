@@ -56,13 +56,17 @@ class Review(models.Model):
 
 
 class Job(models.Model):
+  DONE_OR_NOT = (
+    ('1', 'Done'),
+    ('2', 'Not Done')
+  )
+
   name = models.CharField(max_length=100)
   task = models.CharField(max_length=150)
   location = models.CharField(max_length=100)
   reward = models.IntegerField()
   description = models.TextField(max_length=250)
-  isDone = models.BooleanField(default=False)
-  # M:M users
+  isDone = models.CharField(choices=DONE_OR_NOT, default='2', max_length=1)
   member = models.ForeignKey(Member, default=None, on_delete=models.CASCADE)
   contractors = models.ManyToManyField(Contractor)
 
