@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Become a Member</h1>
-<form action="{% url 'members_create'%}" method="POST">
+<form action="{% url 'members_create'%}" method="POST" id="member-form">
   {% csrf_token %}
   <!-- Render the inputs -->
   {{ member_create_form.as_p }}
