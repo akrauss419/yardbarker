@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>{{member}}</h1>
+<div class="profile_page">
+  <h1>{{member}}</h1>
 
-<div class="row">
-  <div class="col s6 col-offset-3">
-    <div class="card">
-      <div class="card-content">
-        <p>Phone Number: {{ member.phone }}</p>
-        <p>Email: {{ member.email }}</p>
-        <p>Location: {{ member.location }}</p>
+  <div class="row">
+    <div class="col s6 col-offset-3">
+      <div class="card">
+        <div class="card-content">
+          <p><span>Phone Number: </span>{{ member.phone }}</p>
+          <p><span>Email: </span>{{ member.email }}</p>
+          <p><span>Location:</span> {{ member.location }}</p>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+
 
 {% endblock %}

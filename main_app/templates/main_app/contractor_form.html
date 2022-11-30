@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-
 {% block content %}
+
+<div class="profile_page">
   {% if object %}
     <h1>Edit {{object.name}}</h1>
   {% else %}
@@ -16,4 +17,6 @@
     </table>
     <input type="submit" value="SUBMIT" class="btn">
   </form>
+</div>
+  
 {% endblock %}

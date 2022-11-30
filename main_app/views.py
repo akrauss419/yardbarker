@@ -32,7 +32,7 @@ def member_detail(request):
 
 @login_required
 def jobs_index(request):
-  jobs = Job.objects.filter(isDone=False)
+  jobs = Job.objects.filter(isDone='2')
   return render(request, 'jobs/index.html', {
     'jobs': jobs
   })
@@ -57,7 +57,7 @@ def jobs_detail(request, job_id):
 
 class JobUpdate(LoginRequiredMixin, UpdateView):
   model = Job
-  fields = ['name', 'task', 'location', 'reward', 'description']
+  fields = ['name', 'task', 'location', 'reward', 'description', 'isDone']
 
 
 class JobDelete(LoginRequiredMixin, DeleteView):
@@ -89,7 +89,7 @@ class ContractorDelete(LoginRequiredMixin, DeleteView):
 
 
 def jobs_create(request):
-  current_id = request.user.id
+  # current_id = request.user.id
   member = Member.objects.get(user=request.user)
   error_message = ''
   job_create_form = JobCreateForm()
@@ -97,7 +97,7 @@ def jobs_create(request):
     form = JobCreateForm(request.POST)
     if form.is_valid():
       new_job = form.save(commit=False)
-      new_job.isDone = False
+      new_job.isDone = '2'
       new_job.member = member
       new_job.save()
       return redirect('detail', job_id=new_job.id)
@@ -111,7 +111,7 @@ def jobs_create(request):
 
 
 def member_create(request):
-  current_id = request.user.id
+  # current_id = request.user.id
   error_message = ''
   member_create_form = MemberCreateForm()
   if request.method == 'POST':

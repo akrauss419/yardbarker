@@ -66,13 +66,25 @@ section {
 } */
 
 #job_detail {
-  width: 60vw;
-  background-color: aquamarine;
-  margin: 0vw 0vw 0vw -5vw !important;
-  
+  margin-left: -3vw;
+  margin-bottom: 1vw;
+  width: 70vw;
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-around !important;
+}
+
+#job_content_card {
+  width: 28vw;
+  height: 24.3vw;
+  margin: 0 -38vmin;
+}
+
+#map {
+  height: 25vw;
+  width: 26vw;
+  margin-right: 5vw;
+  margin-left: -3vw;
 }
 
 #logo-img{
@@ -99,8 +111,8 @@ ul{
   width: 100%;
 }
 
-p{
-  margin-bottom: 2vmin;
+p {
+  margin-bottom: 1vmin !important;
 }
 
 footer.page-footer{
@@ -112,4 +124,36 @@ footer.page-footer{
 main {
   flex: 1 0 auto;
   
+}
+
+.profile_page {
+  margin-left: 6vmin;
+}
+
+.profile_page > h1 {
+  margin-left: 3vmin;
+}
+
+span {
+  font-weight: bold;
+}
+
+.card-title, h1 {
+  font-family: 'Rubik Marker Hatch', cursive;
+}
+
+h4 {
+  margin-left: 2vw;
+}
+
+#delete {
+  margin-left: -1vw;
+}
+
+#cancel {
+  margin-left: 1vw;
+}
+
+#job_photo {
+  margin-top: 5vh;
 }

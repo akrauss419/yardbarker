@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
-
 {% block content %}
+
+<div class="profile_page">
   <h1>Delete Job</h1>
 
   <h4>Are you sure you want to delete {{ object.name }} ?</h4>
 
   <form action="" method="POST">
     {% csrf_token %}
-    <input type="submit" value="Yes - DELETE" class="btn">
-    <a href="{% url 'detail' job.id %}">Cancel</a>
+    <input type="submit" value="Yes - DELETE" class="btn" id="delete">
+    <a href="{% url 'detail' job.id %}" id="cancel">Cancel</a>
   </form>
+</div>
+  
 {% endblock %}

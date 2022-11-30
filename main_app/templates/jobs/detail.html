@@ -1,100 +1,111 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Job Details</h1>
+<div class="profile_page">
+  <h1>Job Details</h1>
 
-<div class="container">
-  <section id="job_detail">
-    <div class="card">
-      <div class="card-content">
-        <span class="card-title">{{ job.name }}</span>
-        <p>Task: {{ job.task }}</p>
-        <p>Location: {{ job.location }}</p>
-        <p>Reward: ${{ job.reward }}</p>
-        <p>Description: {{ job.description|linebreaks }}</p>
-        <span>Is Done:</span>
-        <p>Poster: {{ job.posters }}</p>
+  <div class="container">
+    <section id="job_detail">
+
+      <div id="job_content_card" class="card">
+        <div class="card-content">
+          <span class="card-title">{{ job.name }}</span>
+          <p><span>Task: </span>{{ job.task }}</p>
+          <p><span>Location: </span>{{ job.location }}</p>
+          <p><span>Reward: </span>${{ job.reward }}</p>
+          <p><span>Description: </span>{{ job.description }}</p>
+          <p><span>Is Done: </span>
+            {% if job.isDone == '2' %}
+              Not yet!
+            {% else %}
+              This job has been done.
+            {% endif %}
+          </p>
+          <p><span>Poster: </span>{{ job.member }}</p>
+          {% for contractor in job.contractors.all %}
+            <p><span>Contractor: </span>{{ contractor }}</p>
+          {% endfor %}
+        </div>
+        <div class="card-action">
+          <a href="{% url 'jobs_update' job.id %}">Edit</a>
+          <a href="{% url 'jobs_delete' job.id %}">Delete</a>
+        </div>
+      </div>
+
+      <div id="map">
+        <iframe
+          width="500"
+          height="350"
+          style="border:0"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAyXA5trBp5kK0p357_ocso-mNFbn6J5z0&q={{ job.location }}">
+        </iframe>
+      </div>  
+    </section> 
+  </div>
+
+  <div class="row" id="job_photo">
+    {% for photo in job.jobphoto_set.all %}
+      <img class="responsive-img card-panel" src="{{photo.url}}">
+    {% empty %}
+      <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+    {% endfor %}
+    <form action="{% url 'add_job_photo' job.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+      {% csrf_token %}
+      <input type="file" name="photo-file">
+      <br><br>
+      <button type="submit" class="btn">Upload Photo</button>
+    </form>
+  </div>
+
+
+
+  <hr>
+  <div class="row">
+    <div class="col s6">
+      <h3>{{ job.name }}'s Contractors</h3>
+      {% if job.contractors.count %}
         {% for contractor in job.contractors.all %}
-          <p>Contractor: {{ contractor }}</p>
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">
+                {{ contractor.name }} is currently working on {{ job.name }}
+              </span>
+            </div>
+          </div>
         {% endfor %}
-      </div>
-      <div class="card-action">
-        <a href="{% url 'jobs_update' job.id %}">Edit</a>
-        <a href="{% url 'jobs_delete' job.id %}">Delete</a>
-      </div>
+      {% else %}
+        <h5>No Contractors </h5>
+      {% endif %}
     </div>
+  </div>
 
-    <div>
-      <iframe
-        width="500"
-        height="300"
-        style="border:0"
-        loading="lazy"
-        allowfullscreen
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAyXA5trBp5kK0p357_ocso-mNFbn6J5z0&q={{ job.location }}">
-      </iframe>
-    </div>  
-  </section> 
-</div>
-
-<div class="row">
-  {% for photo in job.jobphoto_set.all %}
-    <img class="responsive-img card-panel" src="{{photo.url}}">
-  {% empty %}
-    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-  {% endfor %}
-  <form action="{% url 'add_job_photo' job.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
-    {% csrf_token %}
-    <input type="file" name="photo-file">
-    <br><br>
-    <button type="submit" class="btn">Upload Photo</button>
-  </form>
-</div>
-
-
-
-<hr>
-<div class="row">
   <div class="col s6">
-    <h3>{{ job.name }}'s Contractors</h3>
-    {% if job.contractors.count %}
-      {% for contractor in job.contractors.all %}
+    <h3>Available Contractors</h3>
+    {% if contractors.count %}
+      {% for contractor in contractors.all %}
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-               {{ contractor.name }} is currently working on {{ job.name }}
+            {{ contractor.name }} is available to work!
             </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_contractor' job.id contractor.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
           </div>
         </div>
       {% endfor %}
     {% else %}
-      <h5>No Contractors </h5>
+      <h5>No More Available Contractors.</h5>
     {% endif %}
   </div>
 </div>
 
-<div class="col s6">
-  <h3>Available Contractors</h3>
-  {% if contractors.count %}
-    {% for contractor in contractors.all %}
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">
-           {{ contractor.name }} is available to work!
-          </span>
-        </div>
-        <div class="card-action">
-          <form action="{% url 'assoc_contractor' job.id contractor.id %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn">Add</button>
-          </form>
-        </div>
-      </div>
-    {% endfor %}
-  {% else %}
-    <h5>No More Available Contractors.</h5>
-  {% endif %}
-</div>
+
 
 {% endblock %}
