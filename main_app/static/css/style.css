@@ -18,9 +18,8 @@ section {
 } */
 
 #job_detail {
-  width: 60vw;
-  background-color: aquamarine;
-  margin: 0vw 0vw 0vw -5vw !important;
+  width: 70vw;
+  margin: 0vw 0vw 0vw -10vw !important;
   
   display: flex !important;
   flex-direction: row !important;
