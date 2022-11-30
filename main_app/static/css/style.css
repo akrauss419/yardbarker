@@ -1,9 +1,31 @@
+/* palette {
+  black: #393E46
+  teal: #6D9886
+  beige: #F2E7D5
+  white: #F7F7F7
+ } */
+
 * {
   box-sizing: border-box;
+  margin: 0;
+}
+
+main.container {
+  margin: 0;
 }
 
 nav {
-  color: chocolate;
+  background-color: #6D9886;
+}
+
+footer.page-footer {
+  background-color: #6D9886;
+}
+
+body {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
 }
 
 section {
@@ -13,13 +35,36 @@ section {
   justify-content: space-around;
 }
 
+.home-banner {
+  width: 100vw;
+  height: 35vh;
+  background-color: #393E46;
+  padding: 0;
+}
+
+.service-carousel {
+  height: 55vh;
+  width: 100vw;
+  background-color: #F2E7D5;
+}
+
+.popular-service.carousel_item {
+  height: 30vh;
+  width: 40vw;
+  background: url('https://i.imgur.com/eBeZWiR.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 /* .container {
   margin: 0;
 } */
 
 #job_detail {
-  width: 70vw;
-  margin: 0vw 0vw 0vw -10vw !important;
+  width: 60vw;
+  background-color: aquamarine;
+  margin: 0vw 0vw 0vw -5vw !important;
   
   display: flex !important;
   flex-direction: row !important;

@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Home</h1>
+<section class="home-banner">
+  <img id="logo" src="https://i.imgur.com/MgDXN9I.png" alt="logo banner">
+</section>
+<section class="service-carousel carousel">
+  <div class="carousel-item popular-service">
+    <h4>Shovel Snow</h4>
+    <h5>Get snow removed from your property</h5>
+    
+  </div>
+</section>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.carousel');
+    var instances = M.Carousel.init(elems, options);
+  });
+</script>
 {% endblock %}
