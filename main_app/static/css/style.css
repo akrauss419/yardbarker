@@ -93,3 +93,23 @@ textarea{
 ul{
   font-family: 'Concert One', cursive;
 }
+
+#about-div {
+  margin-left: 8vmin;
+  width: 100%;
+}
+
+p{
+  margin-bottom: 2vmin;
+}
+
+footer.page-footer{
+  padding-top: 0;
+  text-align: right;
+  background-color: #393E46;
+}
+
+main {
+  flex: 1 0 auto;
+  
+}
