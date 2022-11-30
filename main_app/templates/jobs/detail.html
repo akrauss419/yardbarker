@@ -70,9 +70,9 @@
         {% for contractor in job.contractors.all %}
           <div class="card">
             <div class="card-content">
-              <span class="card-title">
-                {{ contractor.name }} is currently working on {{ job.name }}
-              </span>
+              
+                <h5 id="job-status">{{ contractor.name }} is currently working on {{ job.name }}</h5>
+              
             </div>
           </div>
         {% endfor %}
@@ -88,9 +88,7 @@
       {% for contractor in contractors.all %}
         <div class="card">
           <div class="card-content">
-            <span class="card-title">
-            {{ contractor.name }} is available to work!
-            </span>
+            <h5>{{ contractor.name }} is available to work!</h5>
           </div>
           <div class="card-action">
             <form action="{% url 'assoc_contractor' job.id contractor.id %}" method="POST">
