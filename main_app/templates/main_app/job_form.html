@@ -6,8 +6,6 @@
     <h1>Edit {{object.name}}</h1>
   {% endif %}
     
-  
-
   <form action="" method="POST" id="job-form">
     {% csrf_token %}
     <table>
@@ -17,6 +15,7 @@
     <input type="submit" value="SUBMIT" class="btn" id="job_submit">
   </form>
 </div>
+
 
 <script>
   const selectEl = document.getElementById('id_isDone');

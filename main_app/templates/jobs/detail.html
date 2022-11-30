@@ -6,7 +6,6 @@
 
   <div class="container">
     <section id="job_detail">
-
       <div id="job_content_card" class="card">
         <div class="card-content">
           <span class="card-title">{{ job.name }}</span>
@@ -31,7 +30,6 @@
           <a href="{% url 'jobs_delete' job.id %}">Delete</a>
         </div>
       </div>
-
       <div id="map">
         <iframe
           width="500"
@@ -70,9 +68,7 @@
         {% for contractor in job.contractors.all %}
           <div class="card">
             <div class="card-content">
-              
-                <h5 id="job-status">{{ contractor.name }} is currently working on {{ job.name }}</h5>
-              
+              <h5 id="job-status">{{ contractor.name }} is currently working on {{ job.name }}</h5>
             </div>
           </div>
         {% endfor %}
@@ -103,7 +99,5 @@
     {% endif %}
   </div>
 </div>
-
-
 
 {% endblock %}
