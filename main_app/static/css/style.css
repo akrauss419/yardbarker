@@ -14,18 +14,22 @@ main.container {
   margin: 0;
 }
 
-nav {
+nav, footer.page-footer {
   background-color: #6D9886;
 }
 
-footer.page-footer {
+/* footer.page-footer {
   background-color: #6D9886;
-}
+} */
 
 body {
   width: 100vw;
   margin: 0;
   padding: 0;
+  background-color: #F2E7D5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 section {
@@ -71,4 +75,21 @@ section {
   justify-content: space-around !important;
 }
 
+#logo-img{
+  margin-top: 5px;
+}
 
+form {
+  margin: 40px;
+}
+label{
+  color: #393E46;
+}
+
+textarea{
+  background-color: white;
+}
+
+ul{
+  font-family: 'Concert One', cursive;
+}
