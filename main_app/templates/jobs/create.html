@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
-
 <div class="profile_page">
   <h1>Add Job</h1>
   <form action="{% url 'jobs_create'%}" method="POST">
@@ -13,6 +11,5 @@
     <input type="submit" class="btn" value="Add Job" id="job_submit">
   </form>
 </div>
-
 
 {% endblock %}

@@ -7,7 +7,6 @@ urlpatterns = [
   path('about/', views.about, name='about'),
   path('members/', views.member_detail, name='member_detail'),
   path('members/create/', views.member_create, name='members_create'),
-  # path('members/<int:pk>/update', views.MemberUpdate.as_view(), name='members_update'),
   path('jobs/', views.jobs_index, name='index'),
   path('jobs/<int:job_id>/', views.jobs_detail, name='detail'),
   path('jobs/create/', views.jobs_create, name='jobs_create'),

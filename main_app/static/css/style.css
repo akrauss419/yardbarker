@@ -1,26 +1,7 @@
-/* palette {
-  black: #393E46
-  teal: #6D9886
-  beige: #F2E7D5
-  white: #F7F7F7
- } */
-
 * {
   box-sizing: border-box;
   margin: 0;
 }
-
-main.container {
-  margin: 0;
-}
-
-nav, footer.page-footer {
-  background-color: #6D9886;
-}
-
-/* footer.page-footer {
-  background-color: #6D9886;
-} */
 
 body {
   width: 100vw;
@@ -32,11 +13,57 @@ body {
   flex-direction: column;
 }
 
+main {
+  flex: 1 0 auto;
+}
+
+main.container {
+  margin: 0;
+}
+
+nav, footer.page-footer {
+  background-color: #6D9886;
+}
+
 section {
   padding-top: 5vmin;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+h4 {
+  margin-left: 2vw;
+}
+
+p {
+  margin-bottom: 1vmin !important;
+}
+
+span {
+  font-weight: bold;
+}
+
+form {
+  margin: 40px;
+}
+
+label {
+  color: #393E46;
+}
+
+footer.page-footer {
+  padding-top: 0;
+  text-align: right;
+  background-color: #393E46;
+}
+
+textarea {
+  background-color: white;
+}
+
+ul {
+  font-family: 'Concert One', cursive;
 }
 
 .home-banner {
@@ -61,9 +88,34 @@ section {
   background-position: center;
 }
 
-/* .container {
-  margin: 0;
-} */
+.profile_page {
+  margin-left: 6vmin;
+}
+
+.profile_page > h1 {
+  margin-left: 3vmin;
+}
+
+.card-title, h1, h2 {
+  font-family: 'Rubik Marker Hatch', cursive;
+}
+
+.card-title {
+  font-size: 5vmin !important;
+  color: #6D9886;
+}
+
+.card-content > p {
+  margin-left: 2vmin !important;
+}
+
+.job_progress {
+  font-size: 6vmin;
+}
+
+.disclaimer {
+  font-weight: bold;
+}
 
 #job_detail {
   margin-left: -3vw;
@@ -87,68 +139,13 @@ section {
   margin-left: -3vw;
 }
 
-#logo-img{
+#logo-img {
   margin-top: 5px;
-}
-
-form {
-  margin: 40px;
-}
-label{
-  color: #393E46;
-}
-
-textarea{
-  background-color: white;
-}
-
-ul{
-  font-family: 'Concert One', cursive;
 }
 
 #about-div {
   margin-left: 8vmin;
   width: 100%;
-}
-
-p {
-  margin-bottom: 1vmin !important;
-}
-
-footer.page-footer{
-  padding-top: 0;
-  text-align: right;
-  background-color: #393E46;
-}
-
-main {
-  flex: 1 0 auto;
-  
-}
-
-.profile_page {
-  margin-left: 6vmin;
-}
-
-.profile_page > h1 {
-  margin-left: 3vmin;
-}
-
-span {
-  font-weight: bold;
-}
-
-.card-title, h1, h2 {
-  font-family: 'Rubik Marker Hatch', cursive;
-}
-
-.card-title {
-  font-size: 5vmin !important;
-  color: #6D9886;
-}
-
-h4 {
-  margin-left: 2vw;
 }
 
 #delete {
@@ -171,21 +168,10 @@ h4 {
   margin-left: 1vw;
 }
 
-.card-content > p {
-  margin-left: 2vmin !important;
-}
-
 #user_name {
   font-size: 12vmin;
 }
 
-.job_progress {
-  font-size: 6vmin;
-}
-
-.disclaimer {
-  font-weight: bold;
-}
 #job_submit {
   margin-top: 2vmin;
 }

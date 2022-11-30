@@ -23,13 +23,11 @@ def about(request):
 
 @login_required
 def member_detail(request):
-  # current_id = request.user.id
   curr_member = Member.objects.get(user=request.user)
   job_list = Job.objects.filter(member=curr_member).order_by('-isDone')
   completed_list = job_list.filter(isDone='1')
   not_complete_list = job_list.filter(isDone='2')
   
-  # completed_jobs = Job.objects.include(id_in=finished_list)
   return render(request, 'member_detail.html', {
     'member': curr_member,
     'job_list': job_list,
@@ -97,7 +95,6 @@ class ContractorDelete(LoginRequiredMixin, DeleteView):
 
 
 def jobs_create(request):
-  # current_id = request.user.id
   member = Member.objects.get(user=request.user)
   error_message = ''
   job_create_form = JobCreateForm()
@@ -119,7 +116,6 @@ def jobs_create(request):
 
 
 def member_create(request):
-  # current_id = request.user.id
   error_message = ''
   member_create_form = MemberCreateForm()
   if request.method == 'POST':
