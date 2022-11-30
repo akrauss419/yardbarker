@@ -1,6 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
+nav {
+  color: chocolate;
+}
+
 section {
   padding-top: 5vmin;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
+
+/* .container {
+  margin: 0;
+} */
+
+#job_detail {
+  width: 60vw;
+  background-color: aquamarine;
+  margin: 0vw 0vw 0vw -5vw !important;
+  
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-around !important;
+}
+
+
