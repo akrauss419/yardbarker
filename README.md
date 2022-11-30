@@ -25,6 +25,9 @@
 ## Getting Started
 Don't waste any more time and join the Yard Barker community via [link 👈](https://yardbarker.herokuapp.com) to add your home and yard needs to our listings and see what other jobs need to get done in your area!
 
+<img src="https://i.imgur.com/gBLvSbC.png" alt="Logo" width="500" height="600">
+
+
 ## Instructions
 <details open>
   <summary>How to use Yard Barker app</summary>
@@ -33,6 +36,11 @@ Don't waste any more time and join the Yard Barker community via [link 👈](htt
     <div>* You are able to become contractors and apply the jobs.</div>
     <div>* Feel free to share your expirience by leaving reviews.</div>
 </details>
+
+<img src="https://i.imgur.com/tg1oUzj.png" alt="Logo" width="400" height="500">
+<img src="https://i.imgur.com/BK1C0hJ.png" alt="Logo" width="400" height="500">
+<img src="https://i.imgur.com/PySQf7A.png" alt="Logo" width="400" height="500">
+
 
 ## Upcoming Features
 
