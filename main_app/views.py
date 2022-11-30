@@ -24,9 +24,17 @@ def about(request):
 @login_required
 def member_detail(request):
   # current_id = request.user.id
-  member = Member.objects.get(user=request.user)
+  curr_member = Member.objects.get(user=request.user)
+  job_list = Job.objects.filter(member=curr_member).order_by('-isDone')
+  completed_list = job_list.filter(isDone='1')
+  not_complete_list = job_list.filter(isDone='2')
+  
+  # completed_jobs = Job.objects.include(id_in=finished_list)
   return render(request, 'member_detail.html', {
-    'member': member
+    'member': curr_member,
+    'job_list': job_list,
+    'completed_list': completed_list,
+    'not_complete_list': not_complete_list,
   })
 
 

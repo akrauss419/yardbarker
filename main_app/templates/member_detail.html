@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="profile_page">
-  <h1>{{member}}</h1>
+  <h1 id="user_name">{{member}}</h1>
 
   <div class="row">
     <div class="col s6 col-offset-3">
@@ -14,6 +14,52 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div>
+    <h2 class="job_progress">Jobs In Progress</h2>
+    {% for job in not_complete_list %}
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title" >{{ job.name }}</span>
+          <p><span>Task: </span>{{ job.task }}</p>
+          <p><span>Location: </span>{{ job.location }}</p>
+          <p><span>Reward: </span>${{ job.reward }}</p>
+          <p><span>Description: </span>{{ job.description }}</p>
+          <p><span>Is Done:</span>
+            {% if job.isDone == '2' %}
+              Not yet!
+            {% else %}
+              This job has been done.
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <hr />
+  
+  <div>
+    <h2 class="job_progress">Completed Jobs</h2>
+    {% for job in completed_list %}
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">{{ job.name }}</span>
+          <p><span>Task: </span>{{ job.task }}</p>
+          <p><span>Location: </span>{{ job.location }}</p>
+          <p><span>Reward: </span>${{ job.reward }}</p>
+          <p><span>Description: </span>{{ job.description }}</p>
+          <p><span>Is Done:</span>
+            {% if job.isDone == '2' %}
+              Not yet!
+            {% else %}
+              This job has been done.
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 </div>
 
